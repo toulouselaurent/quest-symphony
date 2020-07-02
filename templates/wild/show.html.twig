@@ -1,20 +1,21 @@
+{# templates/wild/show.html.twig #}
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello WildController!{% endblock %}
+{% block title %}{{ slug }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Slug = {{ slug }} ✅</h1>
-
-    Page Wild:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/laurent/Bureau/php/Symphony/quest-1-symphony/premier-init-symphony/src/Controller/WildController.php'|file_link(0) }}">src/Controller/WildController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/laurent/Bureau/php/Symphony/quest-1-symphony/premier-init-symphony/templates/wild/show.html.twig'|file_link(0) }}">templates/wild/show.html.twig</a></code></li>
-    </ul>
+<div class="media">
+  <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+  <div class="media-body">
+    <h1 class="mt-0">{{ program.title }}</h1>
+    <p>{{ program.summary }}</p>
+    <p>Catégorie : {{ program.category.name }}</p>
+  </div>
 </div>
+
+<a href="{{ path('app_index') }}">
+    Retour à l'accueil
+</a>
+
+
 {% endblock %}
