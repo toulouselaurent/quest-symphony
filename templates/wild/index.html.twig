@@ -15,7 +15,12 @@
         <a href="{{ path('program_show', { 'slug': "walking-dead" }) }}">
             Testing showByProgram() method from WildController to view all seasons in a program.
         </a>
+                <br>
+        <a href="{{ path('episode_show', { 'id': "14" }) }}">
+            Testing showEpisode() method from WildController to view season and program with episode id in URL.
+        </a>
     </div>
+    <br>
     <h2>Toutes les séries de la table program : </h2>
 
     {% for program in programs %}
@@ -26,9 +31,6 @@
     {% else %}
         Aucune série trouvée.
     {% endfor %}
-    <a href="{{ path('app_index') }}">
-        Retour à l'accueil
-    </a>
     <br>
     {# templates/index.html.twig #}
 

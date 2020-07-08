@@ -1,0 +1,26 @@
+{# templates/wild/program.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+
+{% block body %}
+
+<h1><a href="{{ path('wild_show', { 'slug': "walking-dead" }) }}"> {{program.title}} </a></h1>
+<div>
+    {{ program.summary}}
+</div>
+<br>
+<div>
+   <h3> Saison : {{ season.number}}</h3>
+    {{ season.description}}
+</div>
+<br>
+<div>
+   <h4> Episode : {{ episode.number}} - {{ episode.title}}  </h4>
+    {{ episode.synopsis}}
+</div>
+<br>
+<a href="{{ path('app_index') }}">
+    Retour à l'accueil
+</a>
+
+{% endblock %}

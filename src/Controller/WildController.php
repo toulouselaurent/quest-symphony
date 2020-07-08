@@ -69,6 +69,7 @@ class WildController extends AbstractController
         ]);
     }
 
+
     /**
      * 
      * @param string $categoryName
@@ -121,7 +122,6 @@ class WildController extends AbstractController
         ->getRepository(Season::class)
         ->findOneBy(['id' => ($id)]);
 
-
         $program = $season->getProgram();
         $episodes = $season->getEpisodes();
 
@@ -168,5 +168,20 @@ class WildController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/wild/{id}", name="episode_show")
+     */
+
+    public function showEpisode(episode $episode): Response
+    {
+        $season = $episode->getSeason();
+        $program = $season->getProgram();
+        
+    return $this->render('wild/program.html.twig', [
+        'episode'=>$episode,
+        'season'=>$season,
+        'program'=>$program,
+        ]);
+    }
 
 }
