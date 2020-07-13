@@ -5,10 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Program;
 use App\Entity\Category;
 use App\Entity\Season;
 use App\Entity\Episode;
+use App\Form\ProgramSearchType;
+use App\Form\CategoryType;
 
 /**
  * 
@@ -31,10 +34,16 @@ class WildController extends AbstractController
             'No program found in program\'s table.'
             );
         }
-
+        $category = new Category();
+        $form = $this->createForm(CategoryType::class, $category,
+         
+        );
+    
         return $this->render('wild/index.html.twig', [
-            'programs' => $programs
-        ]);
+            'programs' => $programs,
+            'category' => $category,
+            'form' => $form->createView(),
+            ]);
     }
 
     /**
@@ -72,37 +81,37 @@ class WildController extends AbstractController
 
     /**
      * 
-     * @param string $categoryName
-     * @Route("wild/category/{categoryName}", requirements={"categoryName"="[a-z0-9\-\/]+"}, defaults={"categoryName" = null}, name="show_category")
+     * @param string $categName
+     * @Route("wild/categ/{categName}", requirements={"categName"="[a-z0-9\-\/]+"}, defaults={"categName" = null}, name="show_category")
      * @return Response
      */
-    public function showByCategory(string $categoryName) : Response
+    public function showByCategory(string $categName) : Response
     {
-        if (!$categoryName) {
+        if (!$categName) {
             throw $this
-                ->createNotFoundException('No category has been sent to find a program in program\'s table.');
+                ->createNotFoundException('No categ has been sent to find a program in program\'s table.');
         }
-        $categoryName = preg_replace(
+        $categName = preg_replace(
             '/-/',
-            ' ', ucwords(trim(strip_tags($categoryName)), "-")
+            ' ', ucwords(trim(strip_tags($categName)), "-")
         );
         $category = $this->getDoctrine()
             ->getRepository(Category::class)
-            ->findOneBy(['name' => mb_strtolower($categoryName)]);
+            ->findOneBy(['name' => mb_strtolower($categName)]);
 
         $programs = $this->getDoctrine()
         ->getRepository(Program::class)
         ->findBy(['category' => $category], ['id' => 'DESC'], 3 );
 
-        if (!$categoryName) {
+        if (!$categName) {
             throw $this->createNotFoundException(
-                'No programs '.$categoryName.', found in program\'s table.'
+                'No programs '.$categName.', found in program\'s table.'
             );
         }
 
         return $this->render('wild/category.html.twig', [
             'programs' => $programs,
-            'categoryName'  => $categoryName,
+            'categName'  => $categName,
         ]);
     }
 

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}All programs{% endblock %}
+{% block title %}Wild series{% endblock %}
 
 {% block body %}
     <div>
@@ -8,7 +8,7 @@
             Testing show() method from WildController with a real program s slug.
         </a>
         <br>
-        <a href="{{ path('show_category', { 'categoryName': "horreur" }) }}">
+        <a href="{{ path('show_category', { 'categName': "horreur" }) }}">
             Testing showByCategory() method from WildController to view all programs in a category.
         </a>
         <br>
@@ -21,7 +21,10 @@
         </a>
     </div>
     <br>
-    <h2>Toutes les séries de la table program : </h2>
+    <a href="{{ path('categ_add') }}">
+        Ajouter une catégorie
+    </a>
+  {#  <h2>Toutes les séries de la table program : </h2>
 
     {% for program in programs %}
         <div>
@@ -31,7 +34,5 @@
     {% else %}
         Aucune série trouvée.
     {% endfor %}
-    <br>
-    {# templates/index.html.twig #}
-
+    <br>#}
 {% endblock %}

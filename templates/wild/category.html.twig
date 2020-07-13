@@ -1,10 +1,10 @@
 {# templates/wild/category.html.twig #}
 {% extends 'base.html.twig' %}
-{% block title %}{{ categoryName }}{% endblock %}
+{% block title %}{{ categName }}{% endblock %}
 
 {% block body %}
 
-    <h1>Les trois programs {{ categoryName }} par ordre décroissant : </h1>
+    <h1>Les trois programs {{ categName }} par ordre décroissant : </h1>
     {% for program in programs %}
         <div>
             <h2>{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
